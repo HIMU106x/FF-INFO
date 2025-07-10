@@ -293,7 +293,6 @@ app.get('/api/player-info', async (req, res) => {
     });
   }
 });
-});
 
 // Ultra health check endpoint
 app.get('/api/health', (req, res) => {
