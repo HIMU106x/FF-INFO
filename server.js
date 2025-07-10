@@ -77,7 +77,7 @@ app.get('/api/player-info', async (req, res) => {
   }
 
   const normalizedRegion = (region || 'bd').toLowerCase();
-  
+
   // Validate region
   const validRegions = ['bd', 'in', 'id', 'sg', 'th', 'vn', 'br', 'mx', 'na', 'me', 'eu', 'pk', 'ru', 'my', 'tw', 'kr'];
   if (!validRegions.includes(normalizedRegion)) {
@@ -89,14 +89,24 @@ app.get('/api/player-info', async (req, res) => {
     });
   }
 
-  // Ultra API endpoints with fallbacks
+  // Ultra API endpoints with dynamic template
   const apiEndpoints = {
-    primary: `https://aditya-info-v12op.onrender.com/player-info?uid=${uid}&region=${normalizedRegion}`,
+    primary: `https://nodejs-info.vercel.app/info?uid=${uid}`,
     secondary: `https://aditya-info-v9op.onrender.com/player-info?uid=${uid}&region=${normalizedRegion}`,
     outfit: `https://profile-aimguard.vercel.app/generate-profile?uid=${uid}&region=${normalizedRegion}`,
     banner: `https://aditya-banner-v9op.onrender.com/banner-image?uid=${uid}&region=${normalizedRegion}`,
     fallback: `https://backup-ff-api.vercel.app/player?uid=${uid}&region=${normalizedRegion}`
   };
+
+  // (Optional) Proceed to fetch from apiEndpoints.primary or implement logic to use them.
+  res.json({
+    success: true,
+    requestedUid: uid,
+    region: normalizedRegion,
+    endpoints: apiEndpoints,
+    responseTimeMs: Date.now() - startTime
+  });
+});
 
   try {
     // Parallel API calls with timeout and retry logic
