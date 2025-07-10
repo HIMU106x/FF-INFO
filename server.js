@@ -98,16 +98,6 @@ app.get('/api/player-info', async (req, res) => {
     fallback: `https://backup-ff-api.vercel.app/player?uid=${uid}&region=${normalizedRegion}`
   };
 
-  // (Optional) Proceed to fetch from apiEndpoints.primary or implement logic to use them.
-  res.json({
-    success: true,
-    requestedUid: uid,
-    region: normalizedRegion,
-    endpoints: apiEndpoints,
-    responseTimeMs: Date.now() - startTime
-  });
-});
-
   try {
     // Parallel API calls with timeout and retry logic
     const apiPromises = [
@@ -302,6 +292,7 @@ app.get('/api/player-info', async (req, res) => {
       requestId: `req_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`
     });
   }
+});
 });
 
 // Ultra health check endpoint
