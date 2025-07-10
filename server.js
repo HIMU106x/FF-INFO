@@ -91,7 +91,7 @@ app.get('/api/player-info', async (req, res) => {
 
   // Ultra API endpoints with fallbacks
   const apiEndpoints = {
-    primary: `https://aditya-info-v12op.onrender.com/player-info?uid=${uid}`,
+    primary: `https://aditya-info-v12op.onrender.com/player-info?uid=${uid}&region=${normalizedRegion}`,
     secondary: `https://aditya-info-v9op.onrender.com/player-info?uid=${uid}&region=${normalizedRegion}`,
     outfit: `https://profile-aimguard.vercel.app/generate-profile?uid=${uid}&region=${normalizedRegion}`,
     banner: `https://aditya-banner-v9op.onrender.com/banner-image?uid=${uid}&region=${normalizedRegion}`,
